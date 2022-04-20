@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include "Fint.h"
+#include <FVector.h>
 
 using namespace m31;
 using namespace std;
@@ -36,6 +37,9 @@ void Example2() {
 	auto v4 = FInt(0.5f);
 	cout << (v3 / v4).ToString() << endl;
 	cout << (v3 / 0.5f).ToString() << endl;
+
+	auto fv = FVector(02.f, 6.f, 44.f);
+	cout << fv.ToString() << endl;
 
 }
 

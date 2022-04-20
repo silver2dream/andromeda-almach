@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "Fint.h"
+#include "FCalc.h"
 
 using namespace m31;
 
@@ -50,6 +50,14 @@ namespace FIntUnitTest {
 		auto v4 = FInt(-0.5f);
 
 		ASSERT_EQ(-4.f, (v3 / v4).RawFloat());
+	};
+
+	TEST(FIntTest, Sqr) {
+
+		auto v3 = FInt(4);
+		v3 = FCalc::Sqrt(v3);
+
+		ASSERT_EQ(2.f, v3.RawFloat());
 	};
 }
 

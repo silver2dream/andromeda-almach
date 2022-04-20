@@ -9,5 +9,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)Fint.h">
       <Filter>m31</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FVector.h">
+      <Filter>m31</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FCalc.h">
+      <Filter>m31</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

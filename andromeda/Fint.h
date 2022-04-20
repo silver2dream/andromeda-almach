@@ -9,13 +9,18 @@ using namespace std;
 namespace m31 {
 
 	constexpr int BIT_MOVE_TIMES = 10;
-	constexpr int MULTIPLIER_FACTOR = 1 << BIT_MOVE_TIMES ;
+	constexpr int MULTIPLIER_FACTOR = 1 << BIT_MOVE_TIMES;
 
 	struct FInt
 	{
+		FInt() {
+			shiftValue = 0;
+		}
+
 		FInt(int value) {
 			this->shiftValue = value * MULTIPLIER_FACTOR;
 		}
+		
 		FInt(float value) {
 			auto fv = std::round(value * MULTIPLIER_FACTOR);
 			this->shiftValue = static_cast<int>(fv);
@@ -228,7 +233,7 @@ namespace m31 {
 		long shiftValue = 0;
 
 		long getShiftByInt(int v) {
-			return v* MULTIPLIER_FACTOR;
+			return v * MULTIPLIER_FACTOR;
 		}
 
 		long getShiftByfloat(float v) {
