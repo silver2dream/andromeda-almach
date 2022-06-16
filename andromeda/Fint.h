@@ -26,93 +26,76 @@ namespace m31 {
 			this->shiftValue = static_cast<int>(fv);
 		}
 
-		FInt& operator + (const int b) {
-			auto v = FInt(shiftValue + getShiftByInt(b));
-			return v;
+		FInt operator + (const int b) {
+			return FInt(shiftValue + getShiftByInt(b));
 		}
-		FInt& operator + (const float b) {
-			auto v = FInt(shiftValue + getShiftByfloat(b));
-			return v;
+		FInt operator + (const float b) {
+			return FInt(shiftValue + getShiftByfloat(b));
 		}
-		FInt& operator + (const FInt& b) {
-			auto v = FInt(shiftValue + b.shiftValue);
-			return  v;
+		FInt operator + (const FInt& b) {
+			return FInt(shiftValue + b.shiftValue);
 		}
 
-		FInt& operator - (const int b) {
-			auto v = FInt(shiftValue - getShiftByInt(b));
-			return v;
+		FInt operator - (const int b) {
+			return FInt(shiftValue - getShiftByInt(b));
 		}
-		FInt& operator - (const float b) {
-			auto v = FInt(shiftValue - getShiftByfloat(b));
-			return v;
+		FInt operator - (const float b) {
+			return FInt(shiftValue - getShiftByfloat(b));
 		}
-		FInt& operator - (const FInt& b) {
-			auto v = FInt(shiftValue - b.shiftValue);
-			return v;
+		FInt operator - (const FInt& b) {
+			return FInt(shiftValue - b.shiftValue);
 		}
 
-		FInt& operator * (const int b) {
+		FInt operator * (const int b) {
 			if (shiftValue >=0)
 			{
-				shiftValue = shiftValue * b;
+				return FInt(shiftValue * b);
 			}
 			else
 			{
-				shiftValue = -(-shiftValue * b);
+				return FInt(-(-shiftValue * b));
 			}
-			
-			return *this;
 		}
-		FInt& operator * (const float b) {
-			long v = shiftValue * getShiftByfloat(b);
+		FInt operator * (const float b) {
 			if (shiftValue>=0)
 			{
-				shiftValue = v >> BIT_MOVE_TIMES;
+				return FInt((shiftValue * getShiftByfloat(b)) >> BIT_MOVE_TIMES);
 			}
 			else {
-				shiftValue = - (-v >> BIT_MOVE_TIMES);
+				return FInt(-(-(shiftValue * getShiftByfloat(b)) >> BIT_MOVE_TIMES));
 			}
-			return *this;
 		}
-		FInt& operator * (const FInt& b) {
-			long v = shiftValue * b.shiftValue;
+		FInt operator * (const FInt& b) {
 			if (shiftValue>=0)
 			{
-				shiftValue = v >> BIT_MOVE_TIMES;
+				return FInt((shiftValue * b.shiftValue) >> BIT_MOVE_TIMES);
 			}
 			else
 			{
-				shiftValue = -(-v >> BIT_MOVE_TIMES);
+				return FInt(-(-(shiftValue * b.shiftValue) >> BIT_MOVE_TIMES));
 			}
-			return *this;
 		}
 
-		FInt& operator / (const int b) {
+		FInt operator / (const int b) {
 			if (b == 0)
 			{
 				throw invalid_argument("Divisor by zero.");
 			}
-
-			shiftValue = shiftValue << BIT_MOVE_TIMES / b;
-			return *this;
+			return FInt(shiftValue << BIT_MOVE_TIMES / b);
 		}
-		FInt& operator / (const float b) {
+		FInt operator / (const float b) {
 			if (b == 0)
 			{
 				throw invalid_argument("Divisor by zero.");
 			}
-			shiftValue = (shiftValue << BIT_MOVE_TIMES) / getShiftByfloat(b);
-			return *this;
+			return FInt((shiftValue << BIT_MOVE_TIMES) / getShiftByfloat(b));
 		}
-		FInt& operator / (const FInt& b) {
+		FInt operator / (const FInt& b) {
 			if (b.shiftValue == 0)
 			{
 				throw invalid_argument("Divisor by zero.");
 			}
-
-			shiftValue = (shiftValue << BIT_MOVE_TIMES) / b.shiftValue;
-			return *this;
+			return FInt((shiftValue << BIT_MOVE_TIMES) / b.shiftValue);
 		}
 
 		FInt& operator = (const int v) {
@@ -188,26 +171,22 @@ namespace m31 {
 			return shiftValue <= b.shiftValue;
 		}
 	
-		FInt& operator >> (const int moveTimes) {
+		FInt operator >> (const int moveTimes) {
 			if (shiftValue >= 0)
 			{
-				shiftValue = shiftValue >> moveTimes;
+				return FInt(shiftValue >> moveTimes);
 			}
 			else
 			{
-				shiftValue = -(-shiftValue >> moveTimes);
+				return FInt(-(-shiftValue >> moveTimes));
 			}
-			
-			return *this;
 		}
-		FInt& operator << (const int moveTimes) {
-			shiftValue = shiftValue << moveTimes;
-			return *this;
+		FInt operator << (const int moveTimes) {
+			return FInt(shiftValue << moveTimes);
 		}
 
-		FInt& operator-() {
-			shiftValue = -shiftValue;
-			return *this;
+		FInt operator-() {
+			return FInt(-shiftValue);
 		}
 
 		float RawFloat() {
@@ -229,6 +208,7 @@ namespace m31 {
 			return to_string(RawFloat());
 		}
 
+
 	private:
 		long shiftValue = 0;
 
@@ -245,5 +225,4 @@ namespace m31 {
 			shiftValue = newShiftValue;
 		}
 	};
-
 }

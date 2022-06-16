@@ -38,6 +38,7 @@
     <ClInclude Include="pch.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="FCalc_test.cpp" />
     <ClCompile Include="Fint_test.cpp" />
     <ClCompile Include="FVector_test.cpp" />
     <ClCompile Include="pch.cpp">

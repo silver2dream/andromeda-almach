@@ -1,5 +1,4 @@
 #pragma once
-#include <Fint.h>
 #include <string>
 #include <FCalc.h>
 
@@ -10,11 +9,53 @@ namespace m31 {
 	{
 
 	public:
-		/*FVector(float inX, float inY, float inZ) {
+		FVector(float inX, int inY, int inZ) {
 			x = FInt(inX);
 			y = FInt(inY);
 			z = FInt(inZ);
-		};*/
+		};
+
+		FVector(float inX, int inY, float inZ) {
+			x = FInt(inX);
+			y = FInt(inY);
+			z = FInt(inZ);
+		};
+
+		FVector(float inX, float inY, int inZ) {
+			x = FInt(inX);
+			y = FInt(inY);
+			z = FInt(inZ);
+		};
+
+		FVector(float inX, float inY, float inZ) {
+			x = FInt(inX);
+			y = FInt(inY);
+			z = FInt(inZ);
+		};
+
+		FVector(int inX, int inY, int inZ) {
+			x = FInt(inX);
+			y = FInt(inY);
+			z = FInt(inZ);
+		};
+
+		FVector(int inX, float inY, float inZ) {
+			x = FInt(inX);
+			y = FInt(inY);
+			z = FInt(inZ);
+		};
+
+		FVector(int inX, float inY, int inZ) {
+			x = FInt(inX);
+			y = FInt(inY);
+			z = FInt(inZ);
+		};
+
+		FVector(int inX, int inY, float inZ) {
+			x = FInt(inX);
+			y = FInt(inY);
+			z = FInt(inZ);
+		};
 
 		FVector(FInt inX, FInt inY, FInt inZ) {
 			x = inX;
@@ -39,38 +80,45 @@ namespace m31 {
 		static const FVector RightVector;
 		static const FVector LeftVector;
 
-		FVector& operator + (const FVector& b) {
+		FVector operator + (const FVector& b) {
 			x = x + b.x;
 			y = y + b.y;
 			z = z + b.z;
-			return *this;
+			return FVector(x, y, z);
 		}
 
-		FVector& operator - (const FVector& b) {
+		FVector operator - (const FVector& b) {
 			x = x - b.x;
 			y = y - b.y;
 			z = z - b.z;
-			return *this;
+			return FVector(x, y, z);
 		}
 
-		FVector& operator * (const FInt& value) {
+		FVector operator * (const FInt& value) {
 			x = x * value;
 			y = y * value;
 			z = z * value;
-			return *this;
+			return FVector(x, y, z);
 		}
 
-		FVector& operator / (const FInt& value) {
+		FVector operator / (const FInt& value) {
 			x = x / value;
 			y = y / value;
 			z = z / value;
-			return *this;
+			return FVector(x, y, z);
 		}
 
-		FVector& operator - () {
+		FVector operator - () {
 			x = -x;
 			y = -y;
 			z = -z;
+			return FVector(x, y, z);
+		}
+
+		FVector& operator = (const FVector& b) {
+			x = b.x;
+			y = b.y;
+			z = b.z;
 			return *this;
 		}
 
@@ -83,17 +131,43 @@ namespace m31 {
 		}
 
 		FInt SqrMagnitude() {
-			return x * x + y * y + z * z;
+			return (x * x + y * y + z * z);
 		}
 
 		static FInt SqrMagnitude(FVector v) {
 			return v.x * v.x + v.y * v.y + v.z * v.z;
 		}
 
-		FInt Magnitude(){
-			auto m = FCalc::Sqrt(this->SqrMagnitude());
+		FVector Normalized() {
+			if (Magnitude() > 0)
+			{
+				FInt rate = FInt(1) / Magnitude();
+				return FVector(x * rate, y * rate, z * rate);
+			}
+			else
+			{
+				return FVector::ZeroVector;
+			}
+		}
+
+		FInt Magnitude() {
+			auto s = SqrMagnitude();
+			auto m = FCalc::Sqrt(s);
 			return m;
 		}
+
+		static FVector Normalized(FVector v) {
+			if (v.Magnitude() > 0)
+			{
+				FInt rate = FInt(1) / v.Magnitude();
+				return FVector(v.x * rate, v.y * rate, v.z * rate);
+			}
+			else
+			{
+				return FVector::ZeroVector;
+			}
+		}
+		
 	};
 
 	const FVector FVector::ZeroVector = FVector(0, 0, 0);
