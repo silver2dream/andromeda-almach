@@ -167,6 +167,14 @@ namespace m31 {
 				return FVector::ZeroVector;
 			}
 		}
+
+		static FInt Dot(FVector a, FVector b) {
+			return a.x * b.x + a.y * b.y + a.z * b.z;
+		}
+
+		static FVector Cross(FVector a, FVector b) {
+			return FVector(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
+		}
 		
 	};
 
