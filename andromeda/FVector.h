@@ -175,6 +175,19 @@ namespace m31 {
 		static FVector Cross(FVector a, FVector b) {
 			return FVector(a.y * b.z - a.z * b.y, a.z * b.x - a.x * b.z, a.x * b.y - a.y * b.x);
 		}
+
+		static FArgs Angle(FVector from, FVector to) {
+			FInt dot = Dot(from, to);
+			FInt mod = from.Magnitude() * to.Magnitude();
+			if (mod == 0)
+			{
+				return FArgs::Zero;
+			}
+
+			FInt value = dot / mod;
+
+			return FCalc::Acos(value);
+		}
 		
 	};
 

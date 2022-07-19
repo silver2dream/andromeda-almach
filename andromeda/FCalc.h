@@ -1,5 +1,7 @@
 #pragma once
 #include "Fint.h"
+#include "FAcosTable.h"
+#include "FArgs.hpp"
 
 namespace m31 {
 	
@@ -29,6 +31,24 @@ namespace m31 {
 			
 			} while (result!=history&& count < interatorTimes);
 			return result;
+		}
+
+		static FArgs Acos(FInt value) {
+			FInt rate = (value * FAcosTable::HalfIndexCount) + FAcosTable::HalfIndexCount;
+			rate = Clamp(rate, FINT_ZERO, FAcosTable::IndexCount);
+			return FArgs(FAcosTable::Table[rate.RawInt()],FAcosTable::Multipler);
+		}
+
+		static FInt Clamp(FInt input, FInt min, FInt max) {
+			if (input<min)
+			{
+				return min;
+			}
+			if (input>max)
+			{
+				return max;
+			}
+			return input;
 		}
 	};
 }

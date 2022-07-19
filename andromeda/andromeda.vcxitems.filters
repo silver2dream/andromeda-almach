@@ -15,5 +15,11 @@
     <ClInclude Include="$(MSBuildThisFileDirectory)FCalc.h">
       <Filter>m31</Filter>
     </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FAcosTable.h">
+      <Filter>m31</Filter>
+    </ClInclude>
+    <ClInclude Include="$(MSBuildThisFileDirectory)FArgs.hpp">
+      <Filter>m31</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
